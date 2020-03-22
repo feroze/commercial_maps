@@ -17,48 +17,11 @@
 </head>
 <body>
 
-	<div class="container">
-        <div id="content">
-            <p>1. Fetch a JSON file</p>
-            <button id="loadJsonFile">Try</button>
-            <div id="jsonData"></div>
-        </div>
-    </div>
 <div id="mapid" style="width: 1200px; height: 800px;"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <script>
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	const json_path = urlParams.get('json_path')
-	console.log(json_path);
-
-	$(document).ready(function () {
-
-		$("#loadJsonFile").click(function (e) {
-			$.getJSON({
-				url: json_path,
-				success: function (data, status, xhr) {
-					var table = $("<table><tr><th>Lat</th><th>Long</th><th>Name</th></tr>");
-					var tr;
-					console.log(data)
-					for (var i = 0; i < data.results.length; i++) {
-						tr = $("<tr> one result");
-						tr.append("<td>" + data.results[i].geometry.location.lat + "</td>");
-						tr.append("<td>" + data.results[i].geometry.location.lng + "</td>");
-						tr.append("<td>" + data.results[i].name + "</td>");
-						tr.append("</tr>");
-						table.append(tr);
-					}
-					table.append("</table>");
-					$("#jsonData").html(table);
-				}
-			});
-		});
-	});
-
-
     // TODO: Fill this in the main HTML form
     // [lat, lon, display_string]
     // Note: Map is centered around first location
@@ -66,13 +29,14 @@
 	var photoImg = '';
 
     var map_items = [
-        [37.783, -122.410, "<b>Location for sale!</b><br />30 Mason St."],
-        [37.783, -122.406, "<b>Westfield San Francisco</b><br />" + photoImg],
-	    [37.7879, -122.4075, "<b>Union Square</b><br />"],
+		[37.51892765, -122.27449126, "<b>Location for sale!</b><br />"],
+		[37.5186758, -122.2757708, "<b>Safeway</b><br /><img src='http://logo.clearbit.com/safeway.ca' height='50px' width='50px'>"],
+		[37.51780856,-122.270713, "<b>Enterprise Rent-a-car</b><br /><img src='http://logo.clearbit.com/enterprise.com' height='50px' width='50px'>"],
+		[37.52262624, -122.27545336, "<b>USPS</b><br /><img src='http://logo.clearbit.com/usps.com' height='50px' width='50px'>"],
     ]
 
     // this is SF
-	var mymap = L.map('mapid').setView([map_items[0][0], map_items[0][1]], 16);
+	var mymap = L.map('mapid').setView([map_items[0][0], map_items[0][1]], 17);
 
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
